@@ -240,6 +240,8 @@ def train_detector(
             loss_history.append(total_loss.item())
             
         writer.close()
+    print("Finished training, saving model.")
+    torch.save(detector.state_dict(), "fcos_detector.pt")
 
 def inference_with_detector(
     detector,

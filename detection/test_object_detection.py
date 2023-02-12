@@ -38,9 +38,9 @@ class TestDetectorBackboneWithFPN(unittest.TestCase):
         if self.dummy_fpn_feats['p3'] is None:
             self.skipTest("Detector backbone not implemented.")
 
-        self.assertEqual(self.dummy_fpn_feats["p3"].shape, torch.Size([2, self.out_channels, 30, 30]))
-        self.assertEqual(self.dummy_fpn_feats["p4"].shape, torch.Size([2, self.out_channels, 16, 16]))
-        self.assertEqual(self.dummy_fpn_feats["p5"].shape, torch.Size([2, self.out_channels, 9, 9]))
+        self.assertEqual(self.dummy_fpn_feats["p3"].shape, torch.Size([2, self.out_channels, 28, 28]))
+        self.assertEqual(self.dummy_fpn_feats["p4"].shape, torch.Size([2, self.out_channels, 14, 14]))
+        self.assertEqual(self.dummy_fpn_feats["p5"].shape, torch.Size([2, self.out_channels, 7, 7]))
 
     def test_prediction_network(self):
         self.pred_net = FCOSPredictionNetwork(
