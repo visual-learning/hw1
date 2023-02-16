@@ -52,17 +52,17 @@ class TestDetectorBackboneWithFPN(unittest.TestCase):
         if len(class_logits) == 0:
             self.skipTest("Detector backbone not implemented.")
 
-        self.assertEqual(class_logits["p3"].shape, torch.Size([2, 900, self.num_classes]))
-        self.assertEqual(boxreg_deltas["p3"].shape, torch.Size([2, 900, 4]))
-        self.assertEqual(centerness_logits["p3"].shape, torch.Size([2, 900, 1]))
+        self.assertEqual(class_logits["p3"].shape, torch.Size([2, 784, self.num_classes]))
+        self.assertEqual(boxreg_deltas["p3"].shape, torch.Size([2, 784, 4]))
+        self.assertEqual(centerness_logits["p3"].shape, torch.Size([2, 784, 1]))
 
-        self.assertEqual(class_logits["p4"].shape, torch.Size([2, 256, self.num_classes]))
-        self.assertEqual(boxreg_deltas["p4"].shape, torch.Size([2, 256, 4]))
-        self.assertEqual(centerness_logits["p4"].shape, torch.Size([2, 256, 1]))
+        self.assertEqual(class_logits["p4"].shape, torch.Size([2, 196, self.num_classes]))
+        self.assertEqual(boxreg_deltas["p4"].shape, torch.Size([2, 196, 4]))
+        self.assertEqual(centerness_logits["p4"].shape, torch.Size([2, 196, 1]))
 
-        self.assertEqual(class_logits["p5"].shape, torch.Size([2, 81, self.num_classes]))
-        self.assertEqual(boxreg_deltas["p5"].shape, torch.Size([2, 81, 4]))
-        self.assertEqual(centerness_logits["p5"].shape, torch.Size([2, 81, 1]))
+        self.assertEqual(class_logits["p5"].shape, torch.Size([2, 49, self.num_classes]))
+        self.assertEqual(boxreg_deltas["p5"].shape, torch.Size([2, 49, 4]))
+        self.assertEqual(centerness_logits["p5"].shape, torch.Size([2, 49, 1]))
 
     def test_get_fpn_location_coords(self):
         if self.dummy_fpn_feats['p3'] is None:
