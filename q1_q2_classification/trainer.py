@@ -21,6 +21,17 @@ def save_model(epoch, model_name, model):
     print("saving model at ", filename)
     torch.save(model, filename)
 
+# cross entropy loss
+def loss_function(logits, y, weights):
+    logexpsum = torch.logsumexp(logits, 1)
+    zy = (logits * y).sum((1,))
+    import pdb; pdb.set_trace()
+    tmp = (weights == 0).sum(1)
+    mask = tmp.clone()
+    mask[tmp == 0] = 1
+    mask[tmp != 0] = 0
+    result = (mask *(logexpsum - zy)).sum()
+    return result
 
 def train(args, model, optimizer, scheduler=None, model_name='model'):
     writer = SummaryWriter()
@@ -46,7 +57,7 @@ def train(args, model, optimizer, scheduler=None, model_name='model'):
             # This function should take in network `output`, ground-truth `target`, weights `wgt` and return a single floating point number
             # You are NOT allowed to use any pytorch built-in functions
             # Remember to take care of underflows / overflows when writing your function
-            loss = 0
+            loss = loss_function(output, target, wgt)
 
             loss.backward()
             

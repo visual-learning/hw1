@@ -10,6 +10,7 @@ import torch.nn
 from PIL import Image
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset
+import utils
 
 
 class VOCDataset(Dataset):
@@ -54,13 +55,23 @@ class VOCDataset(Dataset):
         label_list = []
         for index in self.index_list:
             fpath = os.path.join(self.ann_dir, index + '.xml')
+            print("fpath", fpath)
             tree = ET.parse(fpath)
             
             # Insert your code here to preload labels
             # Hint: the folder Annotations contains .xml files with class labels for objects in the image
             # The `tree` variable contains the .xml information in an easy-to-access format (it might be useful to read https://docs.python.org/3/library/xml.etree.elementtree.html)
             # Loop through the `tree` to find all objects in the image
-
+            for elem in tree.iter():
+                if elem.tag == 'object':
+                    break
+            for child in elem:
+                if child.tag == 'name':
+                    class_index = self.CLASS_NAMES.index(child.text)
+                if child.tag == 'difficult':
+                    weight_val = 0 if child.text == '1' else 1
+            # print("class_index:%d, weight_val:%d"%(class_index, weight_val))
+            
             #  The class vector should be a 20-dimensional vector with class[i] = 1 if an object of class i is present in the image and 0 otherwise
             class_vec = torch.zeros(20)
 
@@ -69,6 +80,12 @@ class VOCDataset(Dataset):
             weight_vec = torch.ones(20)
 
             # TODO insert your code here
+            class_vec[class_index] = 1
+            weight_vec[class_index] = weight_val
+            # print("class_vec")
+            # print(class_vec)
+            # print("weight_vec")
+            # print(weight_vec)
 
             label_list.append((class_vec, weight_vec))
 
@@ -81,7 +98,9 @@ class VOCDataset(Dataset):
         # Some commonly used ones are random crops, flipping, rotation
         # You are encouraged to read the docs https://pytorch.org/vision/stable/transforms.html
         # Depending on the augmentation you use, your final image size will change and you will have to write the correct value of `flat_dim` in line 46 in simple_cnn.py
-        pass
+        return [
+            transforms.RandomHorizontalFlip(), transforms.RandomCrop(self.size)
+        ]
 
     def __getitem__(self, index):
         """
@@ -108,5 +127,27 @@ class VOCDataset(Dataset):
         image = torch.FloatTensor(img)
         label = torch.FloatTensor(lab_vec)
         wgt = torch.FloatTensor(wgt_vec)
-
+        # print(image.shape)
+        # print(label.shape)
+        # print(wgt.shape)
         return image, label, wgt
+
+
+if __name__ == '__main__':
+    # tmp = VOCDataset('train', 224)
+    # tmp.__getitem__(0)
+    train_loader = utils.get_data_loader(
+        'voc', train=True, batch_size=64, split='trainval', inp_size=64)
+    test_loader = utils.get_data_loader(
+        'voc', train=False, batch_size=64, split='test', inp_size=64)
+
+    # Ensure model is in correct mode and on right device
+    # model.train()
+    # model = model.to(args.device)
+
+    cnt = 0
+
+    for batch_idx, (data, target, wgt) in enumerate(train_loader):
+        import pdb; pdb.set_trace()
+        # data, target, wgt = data.to(args.device), target.to(args.device), wgt.to(args.device)
+        # import pdb; pdb.set_trace()
