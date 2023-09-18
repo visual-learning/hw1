@@ -4,7 +4,6 @@ import math
 from typing import Dict, List, Optional
 
 import torch
-#from a4_helper import *
 from detection_utils import *
 from torch import nn
 from torch.nn import functional as F
@@ -309,7 +308,7 @@ class FCOS(nn.Module):
         locations_per_fpn_level = None
 
         ######################################################################
-        #                           END OF YOUR CODE                         #∏
+        #                           END OF YOUR CODE                         #
         ######################################################################
 
         if not self.training:
@@ -362,7 +361,7 @@ class FCOS(nn.Module):
         pos_loc_per_image = num_pos_locations.item() / images.shape[0]
         self._normalizer = 0.9 * self._normalizer + 0.1 * pos_loc_per_image
 
-        #######################################################################
+        ######################################################################
         # TODO: Calculate losses per location for classification, box reg and
         # centerness. Remember to set box/centerness losses for "background"
         # positions to zero.
