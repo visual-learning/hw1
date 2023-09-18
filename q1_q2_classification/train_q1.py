@@ -11,11 +11,13 @@ if __name__ == "__main__":
     torch.manual_seed(0)
     random.seed(0)
 
-    # create hyperparameter argument class
-    # Use image size of 64x64 in Q1. We will use a default size of 224x224 for the rest of the questions.
-
-    # TODO experiment a little and choose the correct hyperparameters
+    ##################################################################
+    # TODO: Create hyperparameter argument class
+    # Use image size of 64x64 in Q1. We will use a default size of
+    # 224x224 for the rest of the questions.
+    # You should experiment and choose the correct hyperparameters
     # You should get a map of around 22 in 5 epochs
+    ##################################################################
     # args = ARGS(
     #     epochs=10,
     #     inp_size=64,
@@ -26,6 +28,9 @@ if __name__ == "__main__":
     #     step_size=#TODO,
     #     gamma=#TODO
     # )
+    ##################################################################
+    #                          END OF YOUR CODE                      #
+    ##################################################################
 
     print(args)
 

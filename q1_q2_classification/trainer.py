@@ -41,13 +41,23 @@ def train(args, model, optimizer, scheduler=None, model_name='model'):
 
             optimizer.zero_grad()
             output = model(data)
-            
-            # TODO implement a suitable loss function for multi-label classification
-            # This function should take in network `output`, ground-truth `target`, weights `wgt` and return a single floating point number
-            # You are NOT allowed to use any pytorch built-in functions
-            # Remember to take care of underflows / overflows when writing your function
-            loss = 0
 
+            ##################################################################
+            # TODO: Implement a suitable loss function for multi-label
+            # classification. You are NOT allowed to use any pytorch built-in
+            # functions. Remember to take care of underflows / overflows.
+            # Function Inputs:
+            #   - `output`: Outputs from the network
+            #   - `target`: Ground truth labels, refer to voc_dataset.py
+            #   - `wgt`: Weights (difficult or not), refer to voc_dataset.py
+            # Function Outputs:
+            #   - `output`: Computed loss, a single floating point number
+            ##################################################################
+            loss = 0
+            ##################################################################
+            #                          END OF YOUR CODE                      #
+            ##################################################################
+            
             loss.backward()
             
             if cnt % args.log_every == 0:

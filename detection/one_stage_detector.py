@@ -15,7 +15,7 @@ from torchvision.models import feature_extraction
 
 
 class DetectorBackboneWithFPN(nn.Module):
-    r"""
+    """
     Detection backbone network: A tiny RegNet model coupled with a Feature
     Pyramid Network (FPN). This model takes in batches of input images with
     shape `(B, 3, H, W)` and gives features from three different FPN levels
