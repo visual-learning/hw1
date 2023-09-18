@@ -14,14 +14,14 @@ the original FCOS paper for reference.
 in `one_stage_detector.py` . See the test cases to see
 how this network will be used. In the expected output. The classification 
 logits have `NUM_CLASSES` channels, box regression deltas have 4 output 
-channels, and centerness has 1 output channels.
-The height and width of all outputs is flattened to one dimension, resulting 
+channels, and centerness has 1 output channel.
+The height and width of all outputs are flattened to one dimension, resulting 
 in `(B, H * W, C)` format - this format is more convenient for computing loss.
 Now that the network is complete, we need to compute the ground truth 
 data for training the network. We will need to assign a GT target to 
 every prediction from the model.
 
-3. Complete the function get_fpn_location_coords in `detection_utils.py`to get the 
+3. Complete the function get_fpn_location_coords in `detection_utils.py` to get the 
 x, y locations for all the FPN features for each level.
 Confirm your implementation for (3) is correct by running the test suite. We have also implemented 
 the matching of locations to GT boxes for you. To visualize these boxes in Tensorboard, run `python3 train.py --visualize_gt`
@@ -58,7 +58,7 @@ should train this part on AWS. The train.py script will also save a file with
 the loss curve; please submit this plot in your PDF submission.
 
 9. Follow the instructions in `FCOS.inference` to implement inference. We have 
-implemented a function to run NMS for you. Test your infernece implementation
+implemented a function to run NMS for you. Test your inference implementation
 by turning on the `inference` and `test_inference` flags in `train.py`. This will
 upload some sample detections to TensorBoard. The results should be generally accurate.
 
