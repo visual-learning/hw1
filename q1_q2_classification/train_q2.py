@@ -25,7 +25,7 @@ class ResNet(nn.Module):
 
     def forward(self, x):
         ##################################################################
-        # TODO: Return unnormalized log-probabilities here
+        # TODO: Return raw outputs here
         ##################################################################
         pass
         ##################################################################
