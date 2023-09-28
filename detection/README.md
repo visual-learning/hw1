@@ -6,7 +6,7 @@ and `one_stage_detector.py`, and you will be using `train.py` and `test_one_stag
 extensively. To run the tests, you should run `python3 -m test_object_detection`. At this 
 point, most tests should be skipped, and a couple will pass.
 
-1. Follow the instructions in `detection_utils.py` to implement additional FPN
+1. Follow the instructions in `one_stage_detector.py` to implement additional FPN
 layers for transforming `(c3, c4, c5)` to `(p3, p4, p5)`. See Figure 2 in
 the original FCOS paper for reference.
 
