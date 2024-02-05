@@ -282,7 +282,7 @@ def inference_with_detector(
         os.makedirs(det_dir, exist_ok=True)
         if os.path.exists(gt_dir):
             shutil.rmtree(gt_dir)
-        os.mkdir(gt_dir)
+        os.makedirs(gt_dir, exist_ok=True)
 
     all_images = []
 
