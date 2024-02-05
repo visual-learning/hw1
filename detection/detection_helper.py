@@ -279,7 +279,7 @@ def inference_with_detector(
         gt_dir = "mAP/input/ground-truth"
         if os.path.exists(det_dir):
             shutil.rmtree(det_dir)
-        os.mkdir(det_dir)
+        os.makedirs(det_dir, exist_ok=True)
         if os.path.exists(gt_dir):
             shutil.rmtree(gt_dir)
         os.mkdir(gt_dir)
