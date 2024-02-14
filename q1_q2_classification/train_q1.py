@@ -6,6 +6,17 @@ from voc_dataset import VOCDataset
 import numpy as np
 import random
 
+class ARGS:
+    def __init__(self, epochs, inp_size, use_cuda, val_every, lr, batch_size, step_size, gamma):
+        self.epochs = epochs
+        self.inp_size = inp_size
+        self.use_cuda = use_cuda
+        self.val_every = val_every
+        self.lr = lr
+        self.batch_size = batch_size
+        self.step_size = step_size
+        self.gamma = gamma
+
 if __name__ == "__main__":
     np.random.seed(0)
     torch.manual_seed(0)
@@ -18,16 +29,16 @@ if __name__ == "__main__":
     # You should experiment and choose the correct hyperparameters
     # You should get a map of around 22 in 5 epochs
     ##################################################################
-    # args = ARGS(
-    #     epochs=10,
-    #     inp_size=64,
-    #     use_cuda=True,
-    #     val_every=70
-    #     lr=# TODO,
-    #     batch_size=#TODO,
-    #     step_size=#TODO,
-    #     gamma=#TODO
-    # )
+    args = ARGS(
+        epochs=10,
+        inp_size=64,
+        use_cuda=True,
+        val_every=70,
+        lr= 0.001,             #TODO
+        batch_size=64,         #TODO
+        step_size=30,          #TODO
+        gamma=0.1,             #TODO
+    )
     ##################################################################
     #                          END OF YOUR CODE                      #
     ##################################################################
