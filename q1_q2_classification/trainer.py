@@ -22,6 +22,34 @@ def save_model(epoch, model_name, model):
     torch.save(model, filename)
 
 
+def my_sigmoid(x):
+    return 1/(1+torch.exp(-x))
+
+EPS = 1e-10
+
+def loss_fn(output, target, wgt):
+    '''Multilabel classification loss function'''
+    # print("Begin loss_fn")
+    # print("output",output.shape)
+    # print("target",target.shape)
+    # print("wgt",wgt.shape)
+    N, num_classes = output.shape
+    output_prob = my_sigmoid(output)
+    # loss = 0.0
+    # for i in range(10):
+    #     for j in range(num_classes):
+    #         print("output, target, wgt at i, j = ",i,j,output[i][j],target[i][j],wgt[i][j])
+    #         loss += (-1/(N*num_classes)) *wgt[i][j] * (target[i][j] * torch.log(output[i][j]) + (1 - target[i][j]) * torch.log(1 - output[i][j]))
+    #         print("loss at i, j = ",i,j,loss.item(),(-1/(N*num_classes)) *wgt[i][j] * (target[i][j] * torch.log(output[i][j]) + (1 - target[i][j]) * torch.log(1 - output[i][j])))
+        # loss /= num_classes
+    # loss /=  -N
+    # loss1 = (-1/(N*num_classes))*torch.sum(wgt*(target*torch.log(output) + (1-target)*torch.log(1-output)))
+    loss = (-1/(N*num_classes))*torch.sum(wgt*(target*torch.log(output_prob) + (1-target)*torch.log(1-output_prob) + EPS))
+    # print("End loss_fn. loss = ",loss.item())
+    return loss
+
+
+
 def train(args, model, optimizer, scheduler=None, model_name='model'):
     writer = SummaryWriter()
     train_loader = utils.get_data_loader(
@@ -53,7 +81,7 @@ def train(args, model, optimizer, scheduler=None, model_name='model'):
             # Function Outputs:
             #   - `output`: Computed loss, a single floating point number
             ##################################################################
-            loss = 0
+            loss = loss_fn(output, target, wgt)
             ##################################################################
             #                          END OF YOUR CODE                      #
             ##################################################################

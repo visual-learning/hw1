@@ -5,17 +5,10 @@ from simple_cnn import SimpleCNN
 from voc_dataset import VOCDataset
 import numpy as np
 import random
+import warnings
 
-class ARGS:
-    def __init__(self, epochs, inp_size, use_cuda, val_every, lr, batch_size, step_size, gamma):
-        self.epochs = epochs
-        self.inp_size = inp_size
-        self.use_cuda = use_cuda
-        self.val_every = val_every
-        self.lr = lr
-        self.batch_size = batch_size
-        self.step_size = step_size
-        self.gamma = gamma
+warnings.filterwarnings("ignore")
+
 
 if __name__ == "__main__":
     np.random.seed(0)
@@ -38,12 +31,14 @@ if __name__ == "__main__":
         batch_size=64,         #TODO
         step_size=30,          #TODO
         gamma=0.1,             #TODO
+        save_at_end=True,
     )
     ##################################################################
     #                          END OF YOUR CODE                      #
     ##################################################################
 
     print(args)
+    # print(args.lr)
 
     # initializes the model
     model = SimpleCNN(num_classes=len(VOCDataset.CLASS_NAMES), inp_size=64, c_dim=3)
