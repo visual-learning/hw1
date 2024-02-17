@@ -118,13 +118,14 @@ class VOCDataset(Dataset):
         # change and you will have to write the correct value of `flat_dim`
         # in line 46 in simple_cnn.py
         ######################################################################
-        lst =  [
+        if self.split == "test":
+            lst = [transforms.CenterCrop(size=(self.size, self.size))]
+        else:
+            lst =  [
                 transforms.RandomResizedCrop(size=(224, 224), antialias=True),
                 transforms.RandomHorizontalFlip(p=0.5),
             ]
         
-
-        # img = transforms(img)
         return lst
 
     ######################################################################
