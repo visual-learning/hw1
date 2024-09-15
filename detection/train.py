@@ -156,7 +156,7 @@ def main(args):
         return
     
     print("Training model...")
-    if not args.visualize_gt:
+    if not args.visualize_gt and not args.inference:
         train_model(detector, train_loader, hyperparams, overfit=args.overfit)
     # print("Training complete! Saving loss curve to loss.png...")
     print("Training complete!")
@@ -214,15 +214,12 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--visualize_gt", action="store_true")
-    parser.add_argument(
-        "--overfit", type=bool, default=True
-    )
-    parser.add_argument(
-        "--inference", type=bool, default=False
-    )
-    parser.add_argument(
-        "--test_inference", type=bool, default=False
-    )
+    parser.add_argument("--overfit", action="store_true")
+    parser.add_argument("--inference", action="store_true")
+    parser.add_argument("--test_inference", action="store_true")
     args = parser.parse_args()
+    print(args.visualize_gt)
+    print(args.overfit)
+    print(args.inference)
     print(args.test_inference)
     main(args)

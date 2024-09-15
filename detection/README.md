@@ -2,7 +2,7 @@ Please follow the instructions for this part of the assignment in THIS order!
 
 0. Read the FCOS paper (Fully Convolutional One-stage Object Detection), and 
 skim through the starter code. You will be implementing functions in `detection_utils.py`
-and `one_stage_detector.py`, and you will be using `train.py` and `test_one_stage_detection.py`
+and `one_stage_detector.py`, and you will be using `train.py` and `test_object_detection.py`
 extensively. To run the tests, you should run `python3 -m test_object_detection`. At this 
 point, most tests should be skipped, and a couple will pass.
 
@@ -49,7 +49,7 @@ but should go down after that. Once you have verified your implementation is cor
 submit the training loss curve plot in the PDF submission.
 
 8. Next, train a full network, with the command
-`python3 train.py --overfit=False`.
+`python3 train.py`.
  With the default hyperparameters, this should
 take ~30 minutes to train. Use `tmux` to run the train.py script so you do not
 need to watch it constantly. At this point, you will need a GPU, so you
@@ -57,10 +57,10 @@ should train this part on AWS. Please submit the trainig loss curve plot in your
 
 9. Follow the instructions in `FCOS.inference` to implement inference. We have 
 implemented a function to run NMS for you. Test your inference implementation
-by turning on the `inference` and `test_inference` flags in `train.py`. This will
+by turning on the `inference` and `test_inference` flags in `train.py` with the command `python3 train.py --inference --test_inference`. This will
 upload some sample detections to TensorBoard. The results should be generally accurate.
 
-10. Finally, run `python3 train.py --inference --test_inference=False` to compute 
+10. Finally, run `python3 train.py --inference` to compute 
 the final mAP. If everything is correct, you should obtain >= 20 mAP. The inference
 method will output a file with the class-wise mAP and the overall mAP. Please
 submit this in your PDF submission.
